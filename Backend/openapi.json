@@ -1,0 +1,57 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Usuários - Projeto HTTP",
+    "version": "1.0.0",
+    "description": "Interface para gerenciamento de usuários com persistência em arquivo JSON."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Servidor Local"
+    }
+  ],
+  "paths": {
+    "/api/users": {
+      "get": {
+        "summary": "Listar usuários",
+        "responses": {
+          "200": { "description": "Lista retornada com sucesso." }
+        }
+      },
+      "post": {
+        "summary": "Cadastrar usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string" },
+                  "age": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Criado com sucesso." }
+        }
+      }
+    },
+    "/api/users?id={id}": {
+      "put": {
+        "summary": "Atualizar usuário completo",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": { "200": { "description": "Atualizado." } }
+      },
+      "delete": {
+        "summary": "Excluir usuário",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": { "204": { "description": "Excluído." } }
+      }
+    }
+  }
+}
